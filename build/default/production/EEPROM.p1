@@ -1,0 +1,88 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"9 ./I2C.h
+[; ;./I2C.h: 9: void I2C_Start ();
+[v _I2C_Start `(v ~T0 @X0 0 e? ]
+"14
+[; ;./I2C.h: 14: uint8_t I2C_Write( uint8_t Data);
+[v _I2C_Write `(uc ~T0 @X0 0 ef1`uc ]
+"11
+[; ;./I2C.h: 11: void I2C_Res();
+[v _I2C_Res `(v ~T0 @X0 0 e? ]
+"15
+[; ;./I2C.h: 15: uint8_t I2C_Read_Byte(void);
+[v _I2C_Read_Byte `(uc ~T0 @X0 0 ef ]
+"13
+[; ;./I2C.h: 13: void I2C_Nack(void);
+[v _I2C_Nack `(v ~T0 @X0 0 ef ]
+"10
+[; ;./I2C.h: 10: void I2C_Stop();
+[v _I2C_Stop `(v ~T0 @X0 0 e? ]
+"5 EEPROM.c
+[; ;EEPROM.c: 5: uint8_t EEPROM_Read(uint8_t address){
+[v _EEPROM_Read `(uc ~T0 @X0 1 ef1`uc ]
+{
+[e :U _EEPROM_Read ]
+[v _address `uc ~T0 @X0 1 r1 ]
+[f ]
+"6
+[; ;EEPROM.c: 6:     uint8_t data;
+[v _data `uc ~T0 @X0 1 a ]
+"7
+[; ;EEPROM.c: 7:     I2C_Start();
+[e ( _I2C_Start ..  ]
+"8
+[; ;EEPROM.c: 8:     I2C_Write(0b10100000);
+[e ( _I2C_Write (1 -> -> 160 `i `uc ]
+"9
+[; ;EEPROM.c: 9:     I2C_Write(address);
+[e ( _I2C_Write (1 _address ]
+"10
+[; ;EEPROM.c: 10:     I2C_Res();
+[e ( _I2C_Res ..  ]
+"11
+[; ;EEPROM.c: 11:     I2C_Write(0b10100001);
+[e ( _I2C_Write (1 -> -> 161 `i `uc ]
+"13
+[; ;EEPROM.c: 13:     data = I2C_Read_Byte();
+[e = _data ( _I2C_Read_Byte ..  ]
+"14
+[; ;EEPROM.c: 14:     I2C_Nack();
+[e ( _I2C_Nack ..  ]
+"15
+[; ;EEPROM.c: 15:     I2C_Stop();
+[e ( _I2C_Stop ..  ]
+"16
+[; ;EEPROM.c: 16:     return data;
+[e ) _data ]
+[e $UE 1  ]
+"17
+[; ;EEPROM.c: 17: }
+[e :UE 1 ]
+}
+"19
+[; ;EEPROM.c: 19: void EEPROM_Write (uint8_t address , uint8_t data){
+[v _EEPROM_Write `(v ~T0 @X0 1 ef2`uc`uc ]
+{
+[e :U _EEPROM_Write ]
+[v _address `uc ~T0 @X0 1 r1 ]
+[v _data `uc ~T0 @X0 1 r2 ]
+[f ]
+"21
+[; ;EEPROM.c: 21:     I2C_Start();
+[e ( _I2C_Start ..  ]
+"22
+[; ;EEPROM.c: 22:     I2C_Write(0b10100000);
+[e ( _I2C_Write (1 -> -> 160 `i `uc ]
+"23
+[; ;EEPROM.c: 23:     I2C_Write(address);
+[e ( _I2C_Write (1 _address ]
+"24
+[; ;EEPROM.c: 24:     I2C_Write(data);
+[e ( _I2C_Write (1 _data ]
+"25
+[; ;EEPROM.c: 25:     I2C_Stop();
+[e ( _I2C_Stop ..  ]
+"27
+[; ;EEPROM.c: 27: }
+[e :UE 2 ]
+}
